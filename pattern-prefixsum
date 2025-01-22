@@ -1,3 +1,19 @@
 //Prefix Sum involves preprocessing an array to create a new array where each element at index i represents the sum of the array from the start up to i. This allows for efficient sum queries on subarrays.Use this pattern when you need to perform multiple sum queries on a subarray or need to calculate cumulative sums.
 //sample problem -> Given an array nums, answer multiple queries about the sum of elements within a specific range [i, j].
 Input array: nums = [1,2,3,4,5,6], i=1 and j = 3
+
+
+Explaining Prefix -Sum?
+If we have row of jar filled with candies and if we asked how many candies are in all jars from start up to any jar in the row. 
+Approach1: we can calculate candies in each jar until the jar we need. But problem is we need to calculate the candies in a jar all the time which is not effecient.
+Approach2: we can calculate candies in each jar from begining and store in running total.
+Jar 1 candies: 2, running total = 2
+Jar 2 candies:3, running total = 2+3 => 5
+Jar 3 candies: 1, running total = 5+1 => 6
+Jar 4 candies: 4, running total = 6+4 => 10
+
+How many candies from Jar1 to Jar3 -> 6
+CandiesInJars = [2,3,1,4]
+PrefixSum = [2,5,6,10] 
+question: If someone asks how many candies from Jar2 to Jar4
+        we could calculate prefix sum, Jar4 - Jar1 => 10-2 = 8
