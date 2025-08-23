@@ -1,0 +1,27 @@
+//idea is to get unique frequency count for each string and use that frequency count to check other strings has same frequency count and if it has 
+//then push those strings into result map.
+//here we are using array with lenth 26 so that string can be handled if it has all alphabets in it.
+function validGroupAnagram(strs){
+    const result = {};
+    for(let str of strs){
+        const countArr = new Array(26).fill(0);
+
+        for(let c of str){
+            let index = c.charCodeAt(0) - 'a'.charCodeAt(0);
+            countArr[index] += 1;
+        }
+
+        let key = countArr.join(",");
+
+        if(!result[key]) {
+            result[key] = [];
+        }
+
+        result[key].push(str);
+    }
+    
+    return Object.values(result);
+    
+}
+
+validGroupAnagram(["eat", "ate", "tea", "ain"]);
