@@ -1,0 +1,10 @@
+Sliding window works only if this property holds:
+When you expand the window, the condition moves in one direction.
+When you shrink the window, the condition moves in the opposite direction.
+In simpler terms:
+Action	Effect must be
+Expand window	Sum always increases
+Shrink window	Sum always decreases
+This is called monotonic behavior.
+
+sliding window works for positive numbers. If there are negative numbers in the array use prefix sum pattern.
