@@ -17,3 +17,11 @@ CandiesInJars = [2,3,1,4]
 PrefixSum = [2,5,6,10] 
 question: If someone asks how many candies from Jar2 to Jar4
         we could calculate prefix sum, Jar4 - Jar1 => 10-2 = 8
+
+Once the prefix sum array P is built, the sum of any range from index L to R in the original array A is calculated as:
+Sum(L, R) = P[R] - P[L-1]
+(If L = 0, the sum is simply P[R]). 
+Sum(L, R) = P[R] - P[L-1]
+Given A = [3, 1, 5, 2, 4] and its prefix sum P = [3, 4, 9, 11, 15]: 
+Query: Find the sum from index 1 to 3 (values 1, 5, 2).
+Calculation: P[3] - P[1-1] P[3] - P[0] \(\rightarrow \) 11 - 3 = 8.Verification: 1 + 5 + 2 = 8. 
