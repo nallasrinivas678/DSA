@@ -1,0 +1,77 @@
+/**
+ * Search in Rotated Sorted Array (handles duplicates)
+ * Time: O(log n) average, O(n) worst-case
+ * Space: O(1)
+ */
+var search = function(nums, target) {
+    let left = 0;
+    let right = nums.length - 1;
+
+    // Standard binary search loop
+    while (left <= right) {
+
+        // Find middle index
+        let mid = Math.floor((left + right) / 2);
+
+        // 1️⃣ If mid element is target, we are done
+        if (nums[mid] === target) {
+            return true;
+        }
+
+        /**
+         * 2️⃣ DUPLICATE AMBIGUITY CASE
+         * If left, mid, and right are all equal,
+         * we cannot determine which half is sorted.
+         *
+         * Example: [2,2,2,2,2]
+         *            L M   R
+         *
+         * Only safe option → shrink search space
+         */
+        if (nums[left] === nums[mid] && nums[mid] === nums[right]) {
+            left++;
+            right--;
+        }
+
+        /**
+         * 3️⃣ LEFT HALF IS SORTED
+         * nums[left] <= nums[mid] guarantees left side is sorted
+         */
+        else if (nums[left] <= nums[mid]) {
+
+            /**
+             * Check if target lies within the sorted left half
+             * Range: [nums[left], nums[mid])
+             */
+            if (nums[left] <= target && target < nums[mid]) {
+                // Target must be on the left side
+                right = mid - 1;
+            } else {
+                // Target must be on the right side
+                left = mid + 1;
+            }
+        }
+
+        /**
+         * 4️⃣ RIGHT HALF IS SORTED
+         * If left half is not sorted, right half must be sorted
+         */
+        else {
+
+            /**
+             * Check if target lies within the sorted right half
+             * Range: (nums[mid], nums[right]]
+             */
+            if (nums[mid] < target && target <= nums[right]) {
+                // Target must be on the right side
+                left = mid + 1;
+            } else {
+                // Target must be on the left side
+                right = mid - 1;
+            }
+        }
+    }
+
+    // Target not found
+    return false;
+};
